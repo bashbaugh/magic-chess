@@ -1,0 +1,8 @@
+python-chess
+gpiozero
+# smbus2
+setproctitle
+rpi_ws281x
+keyboard
+dbus-python
+PyGObject
