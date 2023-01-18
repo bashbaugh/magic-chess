@@ -1,6 +1,6 @@
 python-chess
 gpiozero
-# smbus2
+smbus2
 setproctitle
 rpi_ws281x
 keyboard

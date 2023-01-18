@@ -4,22 +4,17 @@
 
 ## Hardware and Electronics Setup
 
-## Software Setup instructions
+## Software Setup Instructions
 
 - Install rpi OS lite, enable SSH
 
-### Python dependencies
+### Installing the Software
 
-SSH into your pi and type this to install Git and venv: `sudo apt update && sudo apt install git python3-venv -y` . It will take a minute or two.
+You will need to install the following components (in this order)
 
-Then type `git clone https://github.com/scitronboy/open-magic-chess.git` to download the code.
-
-Then type `cd open-magic-chess` to change into the directory. Now you will need the following:
-
-- Bluetooth gobject requirements for bluetooth server - install with `sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0`
-- Venv
-- Python requirements (python-chess, dbus, gpiozero, etc.) - install with `sudo pip3 install -r requirements.txt`
-- Stockfish 8 or higher - install with `sudo apt install stockfish -y`
+1. Required packages. This includes git, build requirements for the python packages, and Stockfish 8 or higher (the chess engine). Install all this with `sudo apt install git libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 stockfish -y`. It might take a while to install everything.
+2. The chessboard software: download this with `git clone https://github.com/bashbaugh/magic-chess.git && cd magic-chess`
+3. Python requirements (python-chess, gpiozero, etc.) - install with `sudo pip3 install -r requirements.txt`
 
 ### Enable I2C
 

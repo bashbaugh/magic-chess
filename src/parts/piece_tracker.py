@@ -4,20 +4,18 @@ Detect which pieces have moved
 """
 
 import chess
+from lib.MCP23017 import MCP23017
+from logger import logger
+from time import sleep
 
 class MagneticPieceTracker:
     def __init__(self):
-        self.move_recieved = False
-        self.fromsquare = None
-        self.tosquare = None
+        self.mcp1 = MCP23017(0x20, 16)
+        self.mcp2 = MCP23017(0x21, 16)
+        self.mcp3 = MCP23017(0x22, 16)
+        self.mcp4 = MCP23017(0x23, 16)
+
+        logger.info("MagneticPieceTracker initialized")
+
     
-    def piece_moving(self):
-        return False
-        
-    def piece_moved(self):
-        move = chess.Move(self.fromsquare, self.tosquare)
-        return False if move_recieved else move
-        
-    def update(self):
-        pass
         
