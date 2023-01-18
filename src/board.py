@@ -101,7 +101,7 @@ class Board:
     def main(self):
         try:
             while self.status is not SHUTDOWN:
-                
+                pass
         except KeyboardInterrupt:
             logger.debug("Keyboard Interrupt")
             self.shutdown()

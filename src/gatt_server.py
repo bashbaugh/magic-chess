@@ -1,4 +1,5 @@
 import dbus
+import time
 
 from ble_gatt_server.advertisement import Advertisement
 from ble_gatt_server.service import Application, Service, Characteristic, Descriptor
@@ -27,11 +28,14 @@ class ChessboardService(Service):
 
 class PingCharacteristic(Characteristic):
     def __init__(self, service):
-        Characteristic.__init__(self, PING_CHRC_UUID,["read"], service)
+        Characteristic.__init__(self, PING_CHRC_UUID,["read", "write"], service)
         self.add_descriptor(Descriptor("2901", "Ping", ["read"], self))
 
     def ReadValue(self, options):
-        return self.encode_value("hello")
+        return self.encode_value("hello" + str(time.time()))
+
+    def WriteValue(self, value, options):
+        print(str(value))
 
 class BleApplication(Application):
     def __init__(self):
