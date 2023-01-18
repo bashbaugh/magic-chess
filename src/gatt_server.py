@@ -21,8 +21,9 @@ class ChessboardAdvertisement(Advertisement):
         self.include_tx_power = True
 
 class ChessboardService(Service):
-    def __init__(self, index):
+    def __init__(self, index, app):
         Service.__init__(self, index, CHESSBOARD_SVC_UUID, True)
+        self.app = app
         self.add_characteristic(PingCharacteristic(self))
         # self.add_characteristic(BoardStateCharacteristic(self))
 
@@ -32,17 +33,24 @@ class PingCharacteristic(Characteristic):
         self.add_descriptor(Descriptor("2901", "Ping", ["read"], self))
 
     def ReadValue(self, options):
-        return self.encode_value("hello" + str(time.time()))
+        isOn = self.service.app.board.pieces.read_val()
+        return self.encode_value("STATE:" + str(isOn))
 
-    def WriteValue(self, value, options):
-        print(str(value))
+
+    # def WriteValue(self, value, options):
+    #     print('PING RECEIVED')
 
 class BleApplication(Application):
     def __init__(self):
         Application.__init__(self)
-        self.add_service(ChessboardService(0))
+        self.add_service(ChessboardService(0, self))
         self.register()
 
         # Register advertisements
         board_ad = ChessboardAdvertisement(0)
         board_ad.register()
+
+        self.board = None
+
+    def setBoard(self, board):
+        self.board = board

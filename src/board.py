@@ -11,6 +11,7 @@ from time import sleep, time
 import config as cfg
 
 from threading import Thread
+from queue import Queue
 import traceback
 from setproctitle import *
 import socket
@@ -74,16 +75,19 @@ class Board:
 
         # Bluetooth
         self.ble_app = ble_app
-        logger.info("Starting BLE Application")
-        ble_app.run()
+        self.ble_app.setBoard(self)
+        self.ble_thread = Thread(target=self.ble_thread_run)
+        self.ble_thread.start()
+        logger.info("Started BLE Thread")
         
         # self.led.rainbow(40)
-        logger.info("Board initialized")
-            
+
+    def ble_thread_run(self):
+        self.ble_app.run()
             
     def main(self):
         try:
-            while self.status is not SHUTDOWN:
+            while True:
                 pass
         except KeyboardInterrupt:
             logger.debug("Keyboard Interrupt")
@@ -122,7 +126,7 @@ def start():
     try:
         ble_app = BleApplication()
         board = Board(ble_app)
-        # board.main()
+        board.main()
     except Exception as e:
         crash_counter += 1
 

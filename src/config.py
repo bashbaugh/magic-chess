@@ -17,4 +17,4 @@ LOGGING_LEVEL = logging.INFO # Minimum level for logging messages stored in logs
 LOGGING_FORMAT = '%(asctime)-10s CHESS |%(levelname)s: %(message)s' # Log message format
 LOGGING_DATE_FORMAT = '%m-%d %H:%M:%S' # Log message date format
 LOGGING_BACKUP_COUNT = 3 # Number of log files
-LOG_FILE_MAX_BYTES = 6000 # Max bytes per log file
+LOG_FILE_MAX_BYTES = 30000 # Max bytes per log file
