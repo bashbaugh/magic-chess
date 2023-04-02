@@ -18,6 +18,7 @@ class ChessboardAdvertisement(Advertisement):
     def __init__(self, index):
         Advertisement.__init__(self, index, "peripheral")
         self.add_local_name("magic-chessboard")
+        self.add_service_uuid(CHESSBOARD_SVC_UUID)
         self.include_tx_power = True
 
 class ChessboardService(Service):

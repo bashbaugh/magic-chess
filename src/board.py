@@ -47,8 +47,8 @@ class Board:
         # Parts
         # If you want to use a customized part just replace any of these class names with your own.
         # self.led = leds.Neopixel_RGB_LEDs(self.log_warning)
-        self.pieces = piece_tracker.MagneticPieceTracker()
-        self.actuator = actuator.StepperActuator()        
+        # self.pieces = piece_tracker.MagneticPieceTracker()
+        # self.actuator = actuator.StepperActuator()        
         
         # In-game variables
         # self.white_clock_time = None
@@ -119,7 +119,6 @@ class Board:
     def shutdown(self):
         self.led.shutdown()
         self.status = SHUTDOWN
-
 
 def start():
     global crash_counter
