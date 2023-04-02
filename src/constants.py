@@ -1,1 +1,17 @@
 # CONSTANTS
+
+MAX_STEPS_X = 1600
+MAX_STEPS_Y = 1400
+
+STEPS_PER_SQUARE = 150
+
+class Pins:
+  STEP1 = 22
+  DIR1 = 23
+  STEP2 = 24
+  DIR2 = 25
+  # A4988 driver sleep pins
+  STEPSLP = 26
+
+  HOME_X = 5
+  HOME_Y = 6

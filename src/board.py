@@ -48,7 +48,7 @@ class Board:
         # If you want to use a customized part just replace any of these class names with your own.
         # self.led = leds.Neopixel_RGB_LEDs(self.log_warning)
         # self.pieces = piece_tracker.MagneticPieceTracker()
-        # self.actuator = actuator.StepperActuator()        
+        self.magnet = actuator.StepperMagnetActuator()        
         
         # In-game variables
         # self.white_clock_time = None
@@ -79,6 +79,8 @@ class Board:
         self.ble_thread = Thread(target=self.ble_thread_run)
         self.ble_thread.start()
         logger.info("Started BLE Thread")
+
+        self.magnet.home()
         
         # self.led.rainbow(40)
 
@@ -117,8 +119,9 @@ class Board:
         logger.warning(msg)
 
     def shutdown(self):
-        self.led.shutdown()
-        self.status = SHUTDOWN
+        # self.led.shutdown()
+        # self.status = SHUTDOWN
+        self.magnet.shutdown()
 
 def start():
     global crash_counter
@@ -130,6 +133,7 @@ def start():
         crash_counter += 1
 
         ble_app.quit()
+        board.shutdown()
         
         logger.error("Program crashed")
         logger.critical(traceback.format_exc())
@@ -137,9 +141,9 @@ def start():
             logger.warning("Maximum crashes reached. Stopping.")
             return
         
-        if cfg.RESTART_ON_CRASH:
-            logger.info("Restarting...")
-            start()
+        # if cfg.RESTART_ON_CRASH:
+        #     logger.info("Restarting...")
+        #     start()
 
 if __name__ == "__main__":
     start()

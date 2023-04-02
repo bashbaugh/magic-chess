@@ -78,7 +78,7 @@ while True:
   com = input("Enter <steps direction delay?>:")
   direction = int(com.split(" ")[1])
   steps = int(com.split(" ")[0])
-  delay = 0.004 if len(com.split(" ")) < 3 else float(com.split(" ")[2])
+  delay = 0.001 if len(com.split(" ")) < 3 else float(com.split(" ")[2])
 
   s.step(steps, direction, delay)
 
